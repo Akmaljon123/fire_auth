@@ -44,7 +44,7 @@ class AuthenticationService{
 
   static Future<User?> registerUser({required String name, required String email, required String password})async{
     UserCredential user = await auth.createUserWithEmailAndPassword(email: email, password: password);
-    user.user?.updateDisplayName(name);
+    await user.user?.updateDisplayName(name);
     if(user.user != null){
       return user.user;
     }else{
