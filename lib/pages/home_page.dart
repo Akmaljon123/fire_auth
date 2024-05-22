@@ -67,7 +67,9 @@ class _HomePageState extends State<HomePage> {
 
                   await AuthenticationService.editPassword(controller.text);
 
-                  Navigator.pop(context);
+                  if(context.mounted){
+                    Navigator.pop(context);
+                  }
                 },
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 minWidth: 340,
@@ -82,10 +84,12 @@ class _HomePageState extends State<HomePage> {
               MaterialButton(
                 onPressed: ()async{
                   await AuthenticationService.logout();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context)=>const LoginPage())
-                  );
+                  if(context.mounted){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context)=>const LoginPage())
+                    );
+                  }
                 },
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 minWidth: 340,
@@ -100,10 +104,12 @@ class _HomePageState extends State<HomePage> {
               MaterialButton(
                 onPressed: ()async{
                   await AuthenticationService.delete();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context)=>const LoginPage())
-                  );
+                  if(context.mounted){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context)=>const LoginPage())
+                    );
+                  }
                 },
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 minWidth: 340,

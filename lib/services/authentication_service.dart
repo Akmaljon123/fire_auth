@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../pages/home_page.dart';
 
 class AuthenticationService{
@@ -15,19 +13,14 @@ class AuthenticationService{
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        log("Google sign-in aborted by user.");
         return null;
       }
-
-      log("Google user: ${googleUser.email}");
 
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
-      log("Obtained Google authentication credentials.");
 
       final UserCredential userCredential = await auth.signInWithCredential(credential);
       final User? user = userCredential.user;
@@ -90,5 +83,4 @@ class AuthenticationService{
       await googleSignIn.disconnect();
     }
   }
-
 }
